@@ -21,7 +21,7 @@ $.ajax({
 
         }
         else{
-            window.location.href = "success.html";
+            window.location.href = "manager.html";
         }
     }
 })
