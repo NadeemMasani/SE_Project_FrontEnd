@@ -1,85 +1,126 @@
 $(document).ready(function () {
     refereshBaseRate();
+    $("#updateBaseRates").click(function (event) {
+        var arr = $("#txtDate").val().split(" ");
+        baseRateMonth = arr[0];
+        baseRateYear = Number(arr[1]);
+        var months = [
+            'January', 'February', 'March', 'April', 'May',
+            'June', 'July', 'August', 'September',
+            'October', 'November', 'December'
+        ];
+        var baseRateMonth = Number(months.indexOf(baseRateMonth) + 1);
+        selectedBaseRate(baseRateMonth, baseRateYear);
+    });
     $("#setRate").submit(function (event) {
         event.preventDefault();
         $("#success").empty();
-        console.log("hello");
         var startdate = $("#sdate").val();
         var enddate = $("#edate").val();
         var rate = Number($("#rate").val());
-        console.log(startdate);
-
-        if(startdate === "" || enddate === ""){
+        if (startdate === "" || enddate === "") {
             $("#success").append("Please enter all required fields before submitting");
         }
-        else{
+        else {
+            $.ajax({
+                url: 'https://se532.herokuapp.com/setBaseRate',
+                method: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({
+                    'fromDate': startdate,
+                    'toDate': enddate,
+                    'rate': rate
+                }),
+                success: function (data, status) {
+                    if (data.success === 1) {
+                        $("#success").append("Base Rate updated successfully");
+                        refereshBaseRate();
+                    }
+                }
+            })
+        }
+    });
+    $("#updateBaseRate").submit(function (event) {
+        event.preventDefault();
+        $("#updateSuccess").empty();
+        var startdateUpdate = $("#sdateUpdate").val();
+        var enddateUpdate = $("#edateUpdate").val();
+        var rateUpdate = Number($("#rateUpdate").val());
+        if (startdateUpdate === "" || enddateUpdate === "") {
+            $("#updateSuccess").append("Please enter all required fields before submitting");
+        }
+        else {
+            $.ajax({
+                url: 'https://se532.herokuapp.com/updateBaseRate',
+                method: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({
+                    'fromDate': startdateUpdate,
+                    'toDate': enddateUpdate,
+                    'rate': rateUpdate
+                }),
+                success: function (data, status) {
+                    if (data.success === 1) {
+                        $("#updateSuccess").append("Base Rate updated successfully");
+                        refereshBaseRate();
+                    }
+                }
+            })
+
+        }
+    });
+    function refereshBaseRate() {
+        var date = new Date();
+        var currentMonth = (date.getMonth() + 1);
+        var currentYear = date.getFullYear();
         $.ajax({
-            url: 'https://se532.herokuapp.com/setBaseRate',
+            url: 'https://se532.herokuapp.com/getRate',
             method: 'POST',
             contentType: 'application/json',
             dataType: 'json',
             data: JSON.stringify({
-                'fromDate': startdate,
-                'toDate': enddate,
-                'rate': rate
+                'month': currentMonth,
+                'year': currentYear
             }),
             success: function (data, status) {
-                console.log(data.success);
-                console.log(data.data);
-
+                var rateTable = "";
                 if (data.success === 1) {
-                    $("#success").append("Base Rate updated successfully");
-                    refereshBaseRate();
+                    $.each(data.data, function (index, element) {
+                        rateTable += "<tr><td>" + element.date + "</td><td>" + element.rate + "</td></tr>";
+                    });
+                    document.querySelector("tbody").innerHTML = rateTable;
+                } else {
+                    rateTable += "No Rates Found";
+                    document.querySelector("tbody").innerHTML = rateTable;
                 }
             }
         })
 
     }
-    });
-    $("#myInput").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#myTable tr").filter(function() {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-      });
-
-
-function refereshBaseRate(){
-
-    var date = new Date();
-    var currentMonth = (date.getMonth() + 1 );
-    var currentYear = date.getFullYear();
-    console.log(currentMonth);
-    console.log(currentYear);
-
-    $.ajax({
-        url: 'https://se532.herokuapp.com/getRate',
-        method: 'POST',
-        contentType: 'application/json',
-        dataType: 'json',
-        data: JSON.stringify({
-            'month': currentMonth,
-            'year': currentYear
-        }),
-        success: function (data, status) {
-            //console.log(data.success);
-            //console.log(data.data);
-            var rateTable="";
-
-            if (data.success === 1) {
-                $.each(data.data, function (index, element) {
-                   // console.log(index);
-                   // console.log(element.date);
-                    //console.log(element.rate);
-                    rateTable +=  "<tr><td>" +element.date + "</td><td>" +element.rate + "</td></tr>";
-                    
-                });
-                console.log(rateTable);
-                document.querySelector("tbody").innerHTML = rateTable;
+    function selectedBaseRate(baseRateMonth, baseRateYear) {
+        $.ajax({
+            url: 'https://se532.herokuapp.com/getRate',
+            method: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify({
+                'month': baseRateMonth,
+                'year': baseRateYear
+            }),
+            success: function (data, status) {
+                var rateTable = "";
+                if (data.success === 1) {
+                    $.each(data.data, function (index, element) {
+                        rateTable += "<tr><td>" + element.date + "</td><td>" + element.rate + "</td></tr>";
+                    });
+                    document.querySelector("tbody").innerHTML = rateTable;
+                } else {
+                    rateTable += "No Rates Found";
+                    document.querySelector("tbody").innerHTML = rateTable;
+                }
             }
-        }
-    })
-
-}      
-
+        })
+    }
 });

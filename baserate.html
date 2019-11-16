@@ -73,7 +73,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" id="room">
+        <a class="nav-link" href="managebooking.html">
           <i class="fas fa-hotel"></i>
           <span>Room Allocation</span></a>
       </li>
@@ -131,31 +131,32 @@
                     <h4 class="mb-3">Update Base Rate</h4>
                     
                   </form>
-                  <form class>
+                  <form id="updateBaseRate" class>
                       <div class="row" style="margin: 4px;">
                       <div class="col-md-4">
                       <label for="sdate">Start Date:</label>
-                      <input type="text" class="form-control" id="sdate1">
+                      <input type="text" class="form-control" id="sdateUpdate">
                       </div>
                       <div class="col-md-4">
                       <label for="edate">End Date:</label>
-                      <input type="text" class="form-control" id="edate1">
+                      <input type="text" class="form-control" id="edateUpdate">
                     </div>
                     </div>
                     <div class="col-md-4">
                       <label for="name">Rate:</label>
-                      <input type="number" class="form-control" id="rate" placeholder="" value="" required="">      
+                      <input type="number" class="form-control" id="rateUpdate" placeholder="" value="" required="">      
                     </div>
                       <br>
-                      <button class="btn btn-primary" id="baserate" style="margin:15px">Update base Rate</button>
-                    
+                      <button class="btn btn-primary" id="updateRate" style="margin:15px">Update base Rate</button>
+                      <span id ="updateSuccess"></span>
                     </form>
   
 
             </div>
-            <div class="col-md-3">
-                <h4 class="mb-3">Current Base Rates</h4>
-                <input class="form-control" id="myInput" type="text" placeholder="Search..">
+            <div id="showRates" class="col-md-3">
+              <h4> Select Date:</h4> <input type='text' class="form-control" id='txtDate' />
+                <button class="btn btn-primary" id="updateBaseRates" style="margin-top: 6px;">Submit</button>
+                <h4 class="mb-3"> Base Rates:</h4>
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
                 <table class="table table-striped">
                     <thead class="thead-dark" id="myTable">
@@ -252,11 +253,29 @@
         } });
       $("#sdate").attr("autocomplete", "off");
       $("#edate").attr("autocomplete", "off");
-      $("#edate1").datepicker({ dateFormat: 'yy-mm-dd' });
-      $("#sdate1").datepicker({ dateFormat: 'yy-mm-dd' });
-      $("#sdate1").attr("autocomplete", "off");
-      $("#edate1").attr("autocomplete", "off");
+      $("#edateUpdate").datepicker({ dateFormat: 'yy-mm-dd' });
+      $("#sdateUpdate").datepicker({ dateFormat: 'yy-mm-dd' });
+      $("#sdateUpdate").attr("autocomplete", "off");
+      $("#edateUpdate").attr("autocomplete", "off");
       });
+      $("#txtDate").datepicker( {
+        changeMonth: true,
+  changeYear: true,
+  dateFormat: "yy-mm-dd",
+  showButtonPanel: true,
+  currentText: "This Month",
+  onChangeMonthYear: function (year, month, inst) {
+    $(this).val($.datepicker.formatDate('MM yy', new Date(year, month - 1, 1)));
+  },
+  onClose: function(dateText, inst) {
+    var month = $(".ui-datepicker-month :selected").val();
+    var year = $(".ui-datepicker-year :selected").val();
+    $(this).val($.datepicker.formatDate('MM yy', new Date(year, month, 1)));
+  }
+}).focus(function () {
+  $(".ui-datepicker-calendar").hide();
+});
+$("#txtDate").attr("autocomplete", "off");
   </script>
 
 </body>
