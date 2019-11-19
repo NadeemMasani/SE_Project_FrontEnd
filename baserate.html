@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<hr lang="en">
 
 <head>
 
@@ -36,12 +36,13 @@
     }
 
     .my-custom-scrollbar {
-    position: relative;
-    height: 400px;
-    overflow: auto;
+      position: relative;
+      height: 400px;
+      overflow: auto;
     }
+
     .table-wrapper-scroll-y {
-    display: block;
+      display: block;
     }
   </style>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -57,7 +58,7 @@
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
-    <a href="login.html" class="fas fa-sign-out-alt ml-auto text-white" id ="role"></a>
+    <a href="login.html" class="fas fa-sign-out-alt ml-auto text-white" id="role"></a>
 
   </nav>
 
@@ -100,75 +101,75 @@
       </li>
     </ul>
     <div id="content-wrapper">
-      
-        <div class="row" id="showBaseRate">
-            <div class="col-md-7">
-                <h4 class="mb-3">Set Base Rate</h4>
-                <form id="setRate" class="needs-validation" novalidate>
-                    <div class="row" style="margin: 4px;">
-                        <div class="col-md-4">
-                    <label for="sdate">Start Date:</label>
-                    <input type="text" class="form-control" id="sdate">
-                    </div>
-                    <div class="col-md-4">
-                    <label for="edate">End Date:</label>
-                    <input type="text" class="form-control" id="edate" required>
-                  </div>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="name">Rate:</label>
-                    <input type="number" class="form-control" id="rate" placeholder="" value="" required>      
-                  </div>
-                    <br>
-                    <button type="submit" class="btn btn-primary" id="baserate" style="margin:15px">Set base Rate</button>
-                    <span class="alert alert-success" id ="success"></span>
-                  </form>
-                  <hr>
-                    <h4 class="mb-3">Update Base Rate</h4>
-                  <form id="updateBaseRate" class>
-                      <div class="row" style="margin: 4px;">
-                      <div class="col-md-4">
-                      <label for="sdate">Start Date:</label>
-                      <input type="text" class="form-control" id="sdateUpdate">
-                      </div>
-                      <div class="col-md-4">
-                      <label for="edate">End Date:</label>
-                      <input type="text" class="form-control" id="edateUpdate">
-                    </div>
-                    </div>
-                    <div class="col-md-4">
-                      <label for="name">Rate:</label>
-                      <input type="number" class="form-control" id="rateUpdate" placeholder="" value="" required="">      
-                    </div>
-                      <br>
-                      <button class="btn btn-primary" id="updateRate" style="margin:15px">Update base Rate</button>
-                      <span class="alert alert-success" id ="updateSuccess"></span>
-                    </form>
-  
 
+      <div class="row" id="showBaseRate">
+        <div class="col-md-7">
+          <h4 class="mb-3">Set Base Rate</h4>
+          <form id="setRate" class="needs-validation" novalidate>
+            <div class="row" style="margin: 4px;">
+              <div class="col-md-4">
+                <label for="sdate">Start Date:</label>
+                <input type="text" class="form-control" id="sdate">
+              </div>
+              <div class="col-md-4">
+                <label for="edate">End Date:</label>
+                <input type="text" class="form-control" id="edate" required>
+              </div>
             </div>
-            
-            <div id="showRates" class="col-md-5">
-              <h5>Select Month:</h5> <input type='text' class="form-control" id='txtDate' style="width:50%;" />
-                <button class="btn btn-primary" id="updateBaseRates" style="margin-top: 6px;">Submit</button>
-                <h4 class="mb-3"> Base Rates:</h4>
-                <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                <table class="table table-striped">
-                    <thead class="thead-dark" id="myTable">
-                      <tr>
-                        <th scope="col">Date</th>
-                        <th scope="col">Rate</th>
-                      </tr>
-                    </thead>
-                    <tbody>
+            <div class="col-md-4">
+              <label for="name">Rate:</label>
+              <input type="number" class="form-control" id="rate" placeholder="" value="" required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary" id="baserate" style="margin:15px">Set base Rate</button>
+            <span class="alert alert-success" id="success"></span>
+          </form>
+          <html>
+          <h4 class="mb-3">Update Base Rate</h4>
+          <form id="updateBaseRate" class>
+            <div class="row" style="margin: 4px;">
+              <div class="col-md-4">
+                <label for="sdate">Start Date:</label>
+                <input type="text" class="form-control" id="sdateUpdate">
+              </div>
+              <div class="col-md-4">
+                <label for="edate">End Date:</label>
+                <input type="text" class="form-control" id="edateUpdate">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="name">Rate:</label>
+              <input type="number" class="form-control" id="rateUpdate" placeholder="" value="" required="">
+            </div>
+            <br>
+            <button class="btn btn-primary" id="updateRate" style="margin:15px">Update base Rate</button>
+            <span class="alert alert-success" id="updateSuccess"></span>
+          </form>
 
-                    </tbody>
-                  </table>
-                </div>
-            </div>
+
+        </div>
+
+        <div id="showRates" class="col-md-5">
+          <h5>Select Month:</h5> <input type='text' class="form-control" id='txtDate' style="width:50%;" />
+          <button class="btn btn-primary" id="updateBaseRates" style="margin-top: 6px;">Submit</button>
+          <h4 class="mb-3"> Base Rates:</h4>
+          <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-striped">
+              <thead class="thead-dark" id="myTable">
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Rate</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
           </div>
-      
-      
+        </div>
+      </div>
+
+
       <!-- Sticky Footer -->
       <footer class="sticky-footer">
         <div class="container my-auto">
@@ -221,7 +222,7 @@
   <script src="vendor/chart.js/Chart.min.js"></script>
   <script src="vendor/datatables/jquery.dataTables.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-  
+
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin.min.js"></script>
@@ -234,41 +235,44 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
     $(function () {
-      $("#edate").datepicker({ dateFormat: 'yy-mm-dd', minDate : 0, 
-        onSelect: function(selected){
-            $("#sdate").datepicker("option","maxDate",selected);
-          }
-    });
+      $("#edate").datepicker({
+        dateFormat: 'yy-mm-dd', minDate: 0,
+        onSelect: function (selected) {
+          $("#sdate").datepicker("option", "maxDate", selected);
+        }
+      });
 
-      $("#sdate").datepicker({ dateFormat: 'yy-mm-dd', minDate : 0,
-       onSelect: function(selected){
-            $("#edate").datepicker("option","minDate",selected);
-        } });
+      $("#sdate").datepicker({
+        dateFormat: 'yy-mm-dd', minDate: 0,
+        onSelect: function (selected) {
+          $("#edate").datepicker("option", "minDate", selected);
+        }
+      });
       $("#sdate").attr("autocomplete", "off");
       $("#edate").attr("autocomplete", "off");
       $("#edateUpdate").datepicker({ dateFormat: 'yy-mm-dd' });
       $("#sdateUpdate").datepicker({ dateFormat: 'yy-mm-dd' });
       $("#sdateUpdate").attr("autocomplete", "off");
       $("#edateUpdate").attr("autocomplete", "off");
-      });
-      $("#txtDate").datepicker( {
-        changeMonth: true,
-  changeYear: true,
-  dateFormat: "yy-mm-dd",
-  showButtonPanel: true,
-  currentText: "This Month",
-  onChangeMonthYear: function (year, month, inst) {
-    $(this).val($.datepicker.formatDate('MM yy', new Date(year, month - 1, 1)));
-  },
-  onClose: function(dateText, inst) {
-    var month = $(".ui-datepicker-month :selected").val();
-    var year = $(".ui-datepicker-year :selected").val();
-    $(this).val($.datepicker.formatDate('MM yy', new Date(year, month, 1)));
-  }
-}).focus(function () {
-  $(".ui-datepicker-calendar").hide();
-});
-$("#txtDate").attr("autocomplete", "off");
+    });
+    $("#txtDate").datepicker({
+      changeMonth: true,
+      changeYear: true,
+      dateFormat: "yy-mm-dd",
+      showButtonPanel: true,
+      currentText: "This Month",
+      onChangeMonthYear: function (year, month, inst) {
+        $(this).val($.datepicker.formatDate('MM yy', new Date(year, month - 1, 1)));
+      },
+      onClose: function (dateText, inst) {
+        var month = $(".ui-datepicker-month :selected").val();
+        var year = $(".ui-datepicker-year :selected").val();
+        $(this).val($.datepicker.formatDate('MM yy', new Date(year, month, 1)));
+      }
+    }).focus(function () {
+      $(".ui-datepicker-calendar").hide();
+    });
+    $("#txtDate").attr("autocomplete", "off");
   </script>
 
 </body>
