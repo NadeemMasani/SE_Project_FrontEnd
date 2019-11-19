@@ -60,14 +60,14 @@ function reservations(resdate) {
 					if (element.checkinTime === null) records += "<input type=\"button\" class =\"btn btn-primary\"  onclick=\"checkInModal(" + element.rid + ")\" value =\"Check in\">";
 
 					if (element.checkoutTime === null)
-					records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Check Out\" onclick=\"checkOutModal(" + element.rid + ")\">";
+						records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Check Out\" onclick=\"checkOutModal(" + element.rid + ")\">";
 					records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Modify Booking\">";
 
 					if (!element.roomNo) records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Allocate Room\" onclick=\"openModal('#allocateRoomModal', " + element.noRooms + ", " + element.rid + ")\">";
 					records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Send Reminder\">";
-					
+
 					if (element.comments !== "Penalty charged")
-					records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Charge Penalty\" onclick=\"chargePenaltyModal('" + element.reservationType +"', " + element.rid + ",'" + element.ccNo + "')\">";
+						records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Charge Penalty\" onclick=\"chargePenaltyModal('" + element.reservationType + "', " + element.rid + ",'" + element.ccNo + "')\">";
 					records += "</div></div>";
 				});
 				$(".card").append(records);
@@ -182,16 +182,44 @@ function checkOutModal(rid) {
 
 }
 
-function chargePenaltyModal(resType,rid,ccNu){
-console.log("hello");
-console.log(resType,rid,ccNu);
-var CCEncoded;
-CCEncoded = "XXXX XXXX XXXX " + ccNu.substr(ccNu.length-4);
-if (resType === 'incentive' || resType === 'conventional'){
-	$("#chargePenaltyModal").modal('show');
-	$("#ccData").append(CCEncoded);
+function chargePenaltyModal(resType, rid, ccNu) {
+	$("#chargePenaltyModal .alert-success").addClass("d-none");
+	console.log("hello");
+	console.log(resType, rid, ccNu);
+	var CCEncoded;
+	CCEncoded = "XXXX XXXX XXXX " + ccNu.substr(ccNu.length - 4);
+	if (resType === 'incentive' || resType === 'conventional') {
+		$("#chargePenaltyModal").modal('show');
+		$("#ccData").html("Credit Card Number : " + CCEncoded);
+		$("#ccData").append("<br>Penalty of First Day will be charged for no show");
+	}
+	else {
+		$("#ccData").empty();
+		$("#ccData").html("No Refund Will be provided");
+		$("#chargePenaltyModal").modal('show');	
+	}
+
+	$("#chargePenalty").click(function(){
+		$.ajax({
+			url: 'https://se532.herokuapp.com/chargePenalty',
+			method: 'POST',
+			contentType: 'application/json',
+			dataType: 'json',
+			data: JSON.stringify({
+				'rid': rid
+			}),
+	
+			success: function (data, status) {
+				if (data.sucess == 0) return console.log('Error', data.message);
+				$("#chargePenaltyModal .alert-success").removeClass("d-none");
+				$(".card").html("");
+				reservations(today);
+			}
+	
+	
+		})
+	
+	});
 }
-else
-$("#ccData").empty();
-$("#chargePenaltyModal").modal('show');
-}
+
+
