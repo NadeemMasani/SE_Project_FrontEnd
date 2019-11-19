@@ -12,7 +12,7 @@ console.log(today);
 reservations(today);
 var name = window.localStorage.getItem('name');
 var role = window.localStorage.getItem('role');
-$("#role").append("Welcome: " + name + "  Role: " + role);
+$("#role").append("Welcome, " + name);
 $("#regDate").attr('autocomplete', 'off');
 var list = document.getElementById('card-id');
 
@@ -210,7 +210,7 @@ function chargePenaltyModal(resType, rid, ccNu) {
 			}),
 	
 			success: function (data, status) {
-				if (data.sucess == 0) return console.log('Error', data.message);
+				if (data.success == 0) return console.log('Error', data.message);
 				$("#chargePenaltyModal .alert-success").removeClass("d-none");
 				$(".card").html("");
 				reservations(today);

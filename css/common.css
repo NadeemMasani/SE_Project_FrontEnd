@@ -6,4 +6,4 @@ a.dropdown-item:hover {
 }
 #content-wrapper {padding: 15px;}
 
-.btn.btn-primary{ border-radius: 0%;}
+.btn.btn-primary, .form-control{ border-radius: 0%;}
