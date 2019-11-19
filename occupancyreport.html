@@ -41,12 +41,12 @@
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">Ophelia's Oasis</a>
+    <a class="navbar-brand mr-1" href="managebooking.html">Ophelia's Oasis</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
-    <a href="login.html" class="fas fa-sign-out-alt ml-auto text-white"></a>
+    <a href="login.html" class="fas fa-sign-out-alt ml-auto text-white" id ="role"></a>
 
   </nav>
 
@@ -60,19 +60,13 @@
           <span>Manage Bookings</span>
         </a>
       </li>
-
       <li class="nav-item">
-        <a class="nav-link" href="roomAllocation.html">
-          <i class="fas fa-hotel"></i>
-          <span>Room Allocation</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="baserate.html">
+        <a class="nav-link" href="billings.html">
           <i class="fas fa-fw fa-table"></i>
           <span>Billings</span></a>
       </li>
 
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown active">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-folder"></i>
@@ -80,10 +74,10 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
 
-          <a class="dropdown-item" href="login.html">Occupancy Report</a>
-          <a class="dropdown-item" href="register.html">Expected Occupancy Report</a>
-          <a class="dropdown-item" href="forgot-password.html">Expected Room Income</a>
-          <a class="dropdown-item" href="forgot-password.html">Incentive Report</a>
+          <a class="dropdown-item active" href="occupancyreport.html">Occupancy Report</a>
+          <a class="dropdown-item" href="expectedoccreport.html">Expected Occupancy Report</a>
+          <a class="dropdown-item" href="expectedroomincome.html">Expected Room Income</a>
+          <a class="dropdown-item" href="incentivereport.html">Incentive Report</a>
         </div>
       </li>
       <li class="nav-item">
@@ -93,6 +87,24 @@
       </li>
     </ul>
     <div id="content-wrapper">
+            <div id="printableArea">
+                    <h4>Occupancy Report</h4>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last name</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">End Date</th>
+                                <th scope="col">Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                
+                        </tbody>
+                    </table>
+                    </div>
+                    <button href="javascript:void(0);" onclick="printPageArea('printableArea')">Print</button>
 
       
       <!-- Sticky Footer -->
@@ -155,7 +167,7 @@
   <!-- Demo scripts for this page-->
   <script src="js/demo/datatables-demo.js"></script>
   <script src="js/demo/chart-area-demo.js"></script>
-  <script src="js/baserate.js"></script>
+  <script src="js/occupancyreport.js"></script>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  

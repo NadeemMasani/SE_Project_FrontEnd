@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    $("#success").hide();
+    $("#updateSuccess").hide();
     refereshBaseRate();
     $("#updateBaseRates").click(function (event) {
         var arr = $("#txtDate").val().split(" ");
@@ -14,6 +16,7 @@ $(document).ready(function () {
     });
     $("#setRate").submit(function (event) {
         event.preventDefault();
+        $("#success").hide();
         $("#success").empty();
         var startdate = $("#sdate").val();
         var enddate = $("#edate").val();
@@ -35,10 +38,12 @@ $(document).ready(function () {
                 success: function (data, status) {
                     if (data.success === 1) {
                         $("#success").append("Base Rate updated successfully");
+                        $("#success").show();
                         refereshBaseRate();
                     }
                     else{
                         $("#success").append("Rate Already exists please use update rate functionality");
+                        $("#success").show();
                     }
                 }
             })
