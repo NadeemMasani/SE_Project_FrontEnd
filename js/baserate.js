@@ -37,6 +37,9 @@ $(document).ready(function () {
                         $("#success").append("Base Rate updated successfully");
                         refereshBaseRate();
                     }
+                    else{
+                        $("#success").append("Rate Already exists please use update rate functionality");
+                    }
                 }
             })
         }

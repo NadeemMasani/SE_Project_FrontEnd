@@ -2,26 +2,67 @@ var date = new Date();
 var dd = date.getDate();
 var mm = date.getMonth() + 1;
 var yyyy = date.getFullYear();
-
+var reservations = new Array();
+var rooms = new Array();
 if (dd < 10)
     dd = '0' + dd;
 if (mm < 10)
     mm = '0' + mm;
-//var today = yyyy+'-'+mm+'-'+dd  ; 
-var today = "2019-11-16";
+var today = yyyy + '-' + mm + '-' + dd;
 console.log(today);
-var rooms =getAvailableRooms()
-var reservations;
-reservations =getAllReservations();
-console.log(reservations);
-console.log(rooms);
+function slectRoom(){
 $('.dropdown-menu a').click(function () {
     $('#selected').text($(this).text());
     console.log($(this).text());
 });
-function getAvailableRooms() {
-    var today = "2019-11-17";
-    var rooms = new Array();
+
+}
+getAvailableRooms(function (roomdata, success) {
+    var reserveroomhtml="";
+    if (roomdata.success === 1) {
+        $.each(roomdata.data, function (index, element) {
+            rooms.push(element);
+        });
+    }
+    else {
+        console.log("No Rooms Available!!");
+    }
+    getAllReservations(function (reservationdata, success) {
+        if (reservationdata.success === 0) {
+            console.log(data.success);
+        }
+        else {
+            $.each(reservationdata.data, function (index, element) {
+                reservations.push(element.rid);
+            });
+            for (index in reservations) {
+                //console.log(reservations[index]);
+                reserveroomhtml += "<div class=\"row\">";
+                reserveroomhtml += "<div class=\"col-sm-4\"> Reservation ID : " + reservations[index] + "</div>";
+                reserveroomhtml += "<div class=\"col-sm-4\">";
+                reserveroomhtml += "<div class=\"dropdown\">";
+                reserveroomhtml += "<button class=\"btn btn-primary dropdown-toggle\" type=\"button\" id=\""+index+"\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Select Room No</button>";
+                reserveroomhtml += "<div class=\"dropdown-menu\">";
+                for(index2 in rooms){
+                reserveroomhtml += "<a class=\"dropdown-item\" href=\"#\">" + rooms[index2] +"</a>";
+                }
+                reserveroomhtml += "</div></div></div>"
+                reserveroomhtml += "<div class=\"col-sm-4\">";
+                reserveroomhtml += "<button type=\"button\" class=\"btn btn-primary\">Allocate Room</button>";
+                reserveroomhtml += "</div>"
+                reserveroomhtml += "</div>"
+            }
+
+            console.log(reserveroomhtml);
+           $(".container1").append(reserveroomhtml);
+            for (index in rooms) {
+                console.log(rooms[index]);
+            }
+        }
+    })
+})
+
+function getAvailableRooms(callback) {
     $.ajax({
         url: 'https://se532.herokuapp.com/getAvailableRooms',
         method: 'POST',
@@ -30,26 +71,10 @@ function getAvailableRooms() {
         data: JSON.stringify({
             'date': today
         }),
-        success: function (data, status) {
-            var roomList = "";
-            console.log(data.success);
-            //console.log(data.data);
-            if (data.success === 1) {
-                $.each(data.data, function (index, element) {
-                    rooms.push(element);
-                });
-
-            }
-            else {
-                console.log("No Rooms");
-            }
-        }
+        success: callback
     })
-    return rooms;
 }
-
-function getAllReservations() {
-    var reservations = new Array();
+function getAllReservations(callback) {
     $.ajax({
         url: 'https://se532.herokuapp.com/getAllReservations',
         method: 'POST',
@@ -58,24 +83,6 @@ function getAllReservations() {
         data: JSON.stringify({
             'date': today
         }),
-        success: function (data, status) {
-           
-            if (data.success === 0) {
-                console.log(data.success);
-                console.log(data.data);
-            }
-
-            else {
-                $.each(data.data, function (index, element) {
-                    //console.log(element.rid);
-                    reservations.push(element.rid);
-
-                });
-               
-        }
-    }
-        })
-
-       return reservations;
-
-    }
+        success: callback
+    })
+}

@@ -6,8 +6,8 @@ if (dd < 10)
     dd = '0' + dd;
 if (mm < 10)
     mm = '0' + mm;
-//var today = mm+'-'+dd+'-'+yyyy;    
-var today = "2019-08-12";
+var today = mm+'-'+dd+'-'+yyyy;    
+//var today = "2019-08-12";
 console.log(today);
 reservations(today);
 var list = document.getElementById('card-id');
