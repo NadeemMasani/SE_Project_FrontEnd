@@ -50,8 +50,8 @@
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
-    <a href="login.html" class="fas fa-sign-out-alt ml-auto text-white" id="role"></a>
-
+    <span class="ml-auto text-white" id="role"></span>
+		<a href="/login.html" onclick="logout()" class="fas fa-sign-out-alt text-white ml-3"></a>
   </nav>
 
   <div id="wrapper">
@@ -114,7 +114,7 @@
             </div>
             <br>
             <button type="submit" class="btn btn-primary" id="baserate" style="margin:15px">Set base Rate</button>
-            <span class="alert alert-success" id="success"></span>
+            <span  id="success"></span>
           </form>
           <hr>
           <h4 class="mb-3">Update Base Rate</h4>
@@ -135,7 +135,7 @@
             </div>
             <br>
             <button class="btn btn-primary" id="updateRate" style="margin:15px">Update base Rate</button>
-            <span class="alert alert-success" id="updateSuccess"></span>
+            <span id="updateSuccess"></span>
           </form>
 
 
