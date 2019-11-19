@@ -1,0 +1,7 @@
+.dropdown-item {white-space: normal;}
+  
+a.dropdown-item:hover {
+    background: #343a40;
+    color: white;
+}
+  #content-wrapper {padding: 15px;}

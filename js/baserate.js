@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    var name = window.localStorage.getItem('name');
+    var role = window.localStorage.getItem('role');
+    $("#role").append("Welcome: " + name + "  Role: " + role);
     $("#success").hide();
     $("#updateSuccess").hide();
     refereshBaseRate();
