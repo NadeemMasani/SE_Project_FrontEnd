@@ -57,15 +57,17 @@ function reservations(resdate) {
 					if (element.roomNo === null) records += "Room Number(s) : Not Allocated yet" + "<br>";
 					else records += "Room Number(s) : " + element.roomNo + "<br>";
 
-					if (element.checkinTime === null) records += "<input type=\"button\" class =\"btn btn-primary\"  onclick=\"checkInUser(" + element.rid + ")\" value =\"Check in\">";
+					if (element.checkinTime === null) records += "<input type=\"button\" class =\"btn btn-primary\"  onclick=\"checkInModal(" + element.rid + ")\" value =\"Check in\">";
 
-					records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Check Out\">";
+					if (element.checkoutTime === null)
+					records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Check Out\" onclick=\"checkOutModal(" + element.rid + ")\">";
 					records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Modify Booking\">";
 
 					if (!element.roomNo) records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Allocate Room\" onclick=\"openModal('#allocateRoomModal', " + element.noRooms + ", " + element.rid + ")\">";
-
 					records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Send Reminder\">";
-					records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Charge Penalty\">";
+					
+					if (element.comments !== "Penalty charged")
+					records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Charge Penalty\" onclick=\"chargePenaltyModal('" + element.reservationType +"', " + element.rid + ",'" + element.ccNo + "')\">";
 					records += "</div></div>";
 				});
 				$(".card").append(records);
@@ -74,9 +76,8 @@ function reservations(resdate) {
 	})
 
 }
-function checkInUser(rid) {
+function checkInModal(rid) {
 	console.log(rid);
-
 	$.ajax({
 		url: 'https://se532.herokuapp.com/checkInUser',
 		method: 'POST',
@@ -87,11 +88,8 @@ function checkInUser(rid) {
 		}),
 
 		success: function (data, status) {
-			alert(data.data);
-			console.log(today);
-			while (list.firstChild) {
-				list.removeChild(list.firstChild);
-			}
+			if (data.sucess == 0) return console.log('Error', data.message);
+			$("#checkInModal").modal('show');
 			reservations(today);
 		}
 
@@ -160,3 +158,40 @@ $("#roomAllocateForm").on("submit", (e) => {
 		}
 	})
 })
+
+function checkOutModal(rid) {
+	console.log(rid);
+	$.ajax({
+		url: 'https://se532.herokuapp.com/checkOutUser',
+		method: 'POST',
+		contentType: 'application/json',
+		dataType: 'json',
+		data: JSON.stringify({
+			'rid': rid
+		}),
+
+		success: function (data, status) {
+			if (data.sucess == 0) return console.log('Error', data.message);
+			$("#checkoutModal").modal('show');
+			console.log(today);
+			reservations(today);
+		}
+
+
+	})
+
+}
+
+function chargePenaltyModal(resType,rid,ccNu){
+console.log("hello");
+console.log(resType,rid,ccNu);
+var CCEncoded;
+CCEncoded = "XXXX XXXX XXXX " + ccNu.substr(ccNu.length-4);
+if (resType === 'incentive' || resType === 'conventional'){
+	$("#chargePenaltyModal").modal('show');
+	$("#ccData").append(CCEncoded);
+}
+else
+$("#ccData").empty();
+$("#chargePenaltyModal").modal('show');
+}
