@@ -4,4 +4,6 @@ a.dropdown-item:hover {
     background: #343a40;
     color: white;
 }
-  #content-wrapper {padding: 15px;}
+#content-wrapper {padding: 15px;}
+
+.btn.btn-primary{ border-radius: 0%;}

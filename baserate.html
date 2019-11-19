@@ -31,6 +31,11 @@
     .table-wrapper-scroll-y {
       display: block;
     }
+
+    .vl {
+      border-left: 4px solid;
+      height: 605px;
+    }
   </style>
 
 
@@ -73,10 +78,10 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
 
-          <a class="dropdown-item" href="login.html">Occupancy Report</a>
-          <a class="dropdown-item" href="register.html">Expected Occupancy Report</a>
-          <a class="dropdown-item" href="forgot-password.html">Expected Room Income</a>
-          <a class="dropdown-item" href="forgot-password.html">Incentive Report</a>
+          <a class="dropdown-item" href="occupancyreport.html">Occupancy Report</a>
+          <a class="dropdown-item" href="expectedoccreport.html">Expected Occupancy Report</a>
+          <a class="dropdown-item" href="expectedroomincome.html">Expected Room Income</a>
+          <a class="dropdown-item" href="incentivereport.html">Incentive Report</a>
 
         </div>
       </li>
@@ -135,8 +140,8 @@
 
 
         </div>
-
-        <div id="showRates" class="col-md-5">
+        <div class="vl"></div>
+        <div id="showRates" class="col-md-4">
           <h5>Select Month:</h5> <input type='text' class="form-control" id='txtDate' style="width:50%;" />
           <button class="btn btn-primary" id="updateBaseRates" style="margin-top: 6px;">Submit</button>
           <h4 class="mb-3"> Base Rates:</h4>
