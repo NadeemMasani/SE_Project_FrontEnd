@@ -1,8 +1,10 @@
+$(".fas.fa-spinner.fa-spin").hide();
 $("form").submit(function(event){
     $("#error").empty();
     event.preventDefault();
     var emailid = $("#inputEmail").val();
     var pwd = $("#inputPassword").val();
+    $(".fas.fa-spinner.fa-spin").show();
 $.ajax({
         url: 'https://se532.herokuapp.com/login',
         method: 'POST',
@@ -15,8 +17,9 @@ $.ajax({
         success: function (data, status) {
         console.log(data.success);
         console.log(data.data);
-
+        $(".fas.fa-spinner.fa-spin").hide();
         if ( data.success === 0){
+
           $("#error").append("Invalid credentials. Please try again");
 
         }

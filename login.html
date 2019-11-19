@@ -12,17 +12,10 @@
     
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
-
-    <style>
-        #error{color:red; font-family:Arial, Helvetica, sans-serif;}
-        #login-btn {width: 50%;}
-       
-
-    </style>
-    
+    <link href="css/login.css" rel="stylesheet">    
 </head>
 
-<body class="bg-primary">
+<body id = "gradient">
     <div class="container">
         <div class="card card-login mx-auto mt-5">
             <div class="card-header">Ophelia's Oasis Hotel</div>
@@ -43,7 +36,11 @@
                         </div>
                     </div>
                     <span id="error"></span>
-                    <button type="submit" class="btn btn-warning" id="login-btn">Login</button>
+                    <div class="fa-3x">
+                        
+                        <button type="submit" class="btn" id="login-btn"><i class= "fas fa-spinner fa-spin" class="mr-4"></i> Login</button>
+                      </div>
+                    
                 </form>
             </div>
         </div>
