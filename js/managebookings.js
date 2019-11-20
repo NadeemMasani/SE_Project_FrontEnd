@@ -44,8 +44,8 @@ function reservations(resdate) {
 
 			else {
 				$.each(data.data, function (index, element) {
-					records += "<div class=\"card-header\" id=\"" + element.rid + index + "\"><h5 class=\"mb-0\"><button class=\"btn btn-link\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapse" + element.rid + "\" aria-expanded=\"false\" aria-controls=\"collapse" + element.rid + "\"> Reservation ID :" + element.rid + "</button></h5></div>";
-					records += "<div id=\"collapse" + element.rid + "\" class=\"collapse\" aria-labelledby=\"" + element.rid + index + "\" data-parent=\"#accordionExample\"><div class=\"card-body\"> First Name: " + element.firstName + " <br> " + "Reservation start date : " + element.startDate + "<br>";
+					records += "<div class='card-header' id='" + element.rid + index + "' data-toggle='collapse' data-target='#collapse" + element.rid + "' aria-expanded='false' aria-controls='collapse" + element.rid + "'>Reservation ID :" + element.rid + "</div>";
+					records += "<div id='collapse" + element.rid + "' class='collapse border' aria-labelledby='" + element.rid + index + "' data-parent='#accordionExample'><div class='card-body'> First Name: " + element.firstName + " <br> " + "Reservation start date : " + element.startDate + "<br>";
 					records += "Reservation End Date : " + element.endDate + "<br>";
 					records += "Total ammount : $" + element.totalAmount + "<br>";
 					records += "Ammount Paid : $" + element.amountPaid + "<br>";
@@ -76,7 +76,7 @@ function reservations(resdate) {
 					records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Send Reminder\">";
 
 					if (element.comments !== "Penalty charged")
-						records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Charge Penalty\" onclick=\"chargePenaltyModal('" + element.reservationType + "', " + element.rid + ",'" + element.ccNo + "')\">";
+						records += "<input type='button' class ='btn btn-primary' value ='Charge Penalty' onclick='chargePenaltyModal('" + element.reservationType + "', " + element.rid + ",'" + element.ccNo + "')'>";
 					records += "</div></div>";
 				});
 				$(".card").append(records);
