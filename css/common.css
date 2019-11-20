@@ -7,3 +7,12 @@ a.dropdown-item:hover {
 #content-wrapper {padding: 15px;}
 
 .btn, .form-control{ border-radius: 0%;}
+
+.card { border: 0px }
+.card-header { 
+	cursor: pointer; 
+	border: 0px; 
+	background-color: #343a40; 
+	color: white; 
+	margin: 1rem 0 0 0; 
+}
