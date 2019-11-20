@@ -9,7 +9,7 @@ if (mm < 10)
 var today = yyyy + '-' + mm + '-' + dd;
 var name = window.localStorage.getItem('name');
 var role = window.localStorage.getItem('role');
-$("#role").html("Welcome: " + name + "  Role: " + role);
+$("#role").append("Welcome, " + name);
 // var today = "2019-08-12";
 console.log(today);
 reservations(today);

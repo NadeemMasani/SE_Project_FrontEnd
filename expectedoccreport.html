@@ -46,8 +46,8 @@
         <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
             <i class="fas fa-bars"></i>
         </button>
-        <a href="login.html" class="fas fa-sign-out-alt ml-auto text-white " id="role"></a>
-
+		<span class="ml-auto text-white" id="role"></span>
+		<a href="/login.html" onclick="logout()" class="fas fa-sign-out-alt text-white ml-3"></a>
     </nav>
 
     <div id="wrapper">
@@ -66,13 +66,13 @@
                     <span>Billings</span></a>
             </li>
 
-            <li class="nav-item dropdown active">
+            <li class="nav-item dropdown active show">
                 <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Reports</span>
                 </a>
-                <div class="dropdown-menu active" aria-labelledby="pagesDropdown">
+                <div class="dropdown-menu active show" aria-labelledby="pagesDropdown">
 
                     <a class="dropdown-item" href="occupancyreport.html">Occupancy Report</a>
                     <a class="dropdown-item active" href="expectedoccreport.html">Expected Occupancy Report</a>

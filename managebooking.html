@@ -108,7 +108,8 @@
 		</button>
 
 
-		<a href="login.html" class="fas fa-sign-out-alt ml-auto text-white" id="role"></a>
+		<span class="ml-auto text-white" id="role"></span>
+		<a href="/login.html" onclick="logout()" class="fas fa-sign-out-alt text-white ml-3"></a>
 
 	</nav>
 
@@ -259,7 +260,12 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					Credit Card Number : <span id ="ccData"></span>
+					<span id ="ccData"></span>
+					<div class="alert-success d-none p-3" role="alert"> Penalty Charged </div>
+
+				</div>
+				<div class="modal-footer">
+					<input type="submit" id="chargePenalty" class="btn btn-primary" value="Charge Penalty" />
 				</div>
 
 			</div>
