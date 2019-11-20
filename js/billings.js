@@ -47,17 +47,15 @@ function reservations(endDate) {
                     records += "Total ammount : $" + element.totalAmount + "<br>";
                     records += "Ammount Paid : $" + element.amountPaid + "<br>";
                     records += "Reservation Type : " + element.reservationType + "<br>";
-
-                    if (element.checkinTime !== null) {
-                        records += "Check In : " + element.checkinTime + "<br>";
-                    }
+                    if (element.checkinTime !== null) records += "Check In : " + moment(element.checkinTime).format("dddd, MMMM Do YYYY, h:mm:ss a") + "<br>";
+					if (element.checkoutTime !== null) records += "Check Out : " + moment(element.checkoutTime).format("dddd, MMMM Do YYYY, h:mm:ss a") + "<br>";
+                    
                     if (element.roomNo === null)
                         records += "Room Number : Not Allocated yet" + "<br>";
                     else
                         records += "Room Number : " + element.roomNo + "<br>";
-                    if (element.checkinTime === null)
-                        records += "<input type=\"button\" class =\"btn btn-primary\"  onclick=\"checkInUser(" + element.rid + ")\" value =\"Check in\">";
-                    records += "<input type=\"button\" class =\"btn btn-primary\" onclick=\"generatebill(" + element.rid + ")\" value =\"Generate Bill \" data-toggle=\"modal\"data-target=\"#generateModal\">";
+  
+                        records += "<input type=\"button\" class =\"btn btn-primary\" onclick=\"generatebill(" + element.rid + ")\" value =\"Generate Bill \" data-toggle=\"modal\"data-target=\"#generateModal\">";
                     records += "<input type=\"button\" class =\"btn btn-primary\" onclick=\"paybill(" + element.rid + ")\" value =\"Pay Bill\">";
                     records += "</div></div>";
                     //}

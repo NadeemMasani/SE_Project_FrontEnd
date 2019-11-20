@@ -50,20 +50,29 @@ function reservations(resdate) {
 					records += "Total ammount : $" + element.totalAmount + "<br>";
 					records += "Ammount Paid : $" + element.amountPaid + "<br>";
 					records += "Reservation Type : " + element.reservationType + "<br>";
-					if (element.checkinTime !== null) records += "Check In : " + element.checkinTime + "<br>";
-
+					if (element.checkinTime !== null) records += "Check In : " + moment(element.checkinTime).format("dddd, MMMM Do YYYY, h:mm:ss a") + "<br>";
+					if (element.checkoutTime !== null) records += "Check Out : " + moment(element.checkoutTime).format("dddd, MMMM Do YYYY, h:mm:ss a") + "<br>";
+					
 					records += "Number of rooms : " + element.noRooms + "<br />"
 
 					if (element.roomNo === null) records += "Room Number(s) : Not Allocated yet" + "<br>";
 					else records += "Room Number(s) : " + element.roomNo + "<br>";
 
-					if (element.checkinTime === null) records += "<input type=\"button\" class =\"btn btn-primary\"  onclick=\"checkInModal(" + element.rid + ")\" value =\"Check in\">";
+					if (element.checkinTime === null) 
+						records += "<input type=\"button\" class =\"btn btn-primary\"  onclick=\"checkInModal(" + element.rid + ")\" value =\"Check in\">";
+					else 
+						records += "<input type=\"button\" class =\"btn btn-primary\"  onclick=\"checkInModal(" + element.rid + ")\" value =\"Check in\" disabled>";
 
 					if (element.checkoutTime === null)
 						records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Check Out\" onclick=\"checkOutModal(" + element.rid + ")\">";
-					records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Modify Booking\">";
+					else 
+						records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Check Out\" onclick=\"checkOutModal(" + element.rid + ")\" disabled>";
 
-					if (!element.roomNo) records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Allocate Room\" onclick=\"openModal('#allocateRoomModal', " + element.noRooms + ", " + element.rid + ")\">";
+						records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Modify Booking\">";
+
+					if (!element.roomNo) 
+						records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Allocate Room\" onclick=\"openModal('#allocateRoomModal', " + element.noRooms + ", " + element.rid + ")\">";
+					
 					records += "<input type=\"button\" class =\"btn btn-primary\" value =\"Send Reminder\">";
 
 					if (element.comments !== "Penalty charged")
